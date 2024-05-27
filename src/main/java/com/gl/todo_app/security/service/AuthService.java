@@ -84,7 +84,7 @@ public class AuthService {
             throw new UserNotFoundException("No account is registered with the " + email);
         }
         PasswordResetToken token = this.passwordTokenUtil.createToken(user);
-        String resetUrl = "http://localhost:5173/todolist/resetPassword?token=" + token.getToken();
+        String resetUrl = "https://todoiit.netlify.app/resetPassword?token=" + token.getToken();
         String mailBody = "Hi " + user.getFirstName() + ", Click the link to reset password - " + resetUrl;
         String mailSubject = "Todo-Application: Reset Password";
         emailService.sendResetPasswordMail(email, mailSubject, mailBody);
