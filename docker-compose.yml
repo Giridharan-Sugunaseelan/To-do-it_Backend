@@ -1,25 +1,19 @@
 version: '3.8'
-services:
-  db:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: A2xHU9xPV2
-      MYSQL_DATABASE: sql12709583
-    ports:
-      - "3306:3306"
-    networks:
-      - todo-network
 
+services:
   app:
     build: .
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12709583
-      SPRING_DATASOURCE_USERNAME: sql12709583
-      SPRING_DATASOURCE_PASSWORD: A2xHU9xPV2
-    depends_on:
-      - db
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-1388e09-to-do-it.h.aivencloud.com:11351/defaultdb?useSSL=true&requireSSL=true
+      SPRING_DATASOURCE_USERNAME: avnadmin
+      SPRING_DATASOURCE_PASSWORD: AVNS_0FGHXdTuFSpAydxO-Na
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: 50
+      SPRING_JPA_SHOW_SQL: true
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
+      SERVER_SERVLET_CONTEXT_PATH: /todoapp
     networks:
       - todo-network
 
