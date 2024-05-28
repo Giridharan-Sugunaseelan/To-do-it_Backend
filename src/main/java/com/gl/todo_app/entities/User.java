@@ -26,7 +26,7 @@ public class User {
     private String role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Project.class)
     private Set<Project> projects = new HashSet<>();
-    @OneToOne(mappedBy = "user", targetEntity = ProfilePicture.class)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, targetEntity = ProfilePicture.class)
     private ProfilePicture profilePicture;
 
     @Override
