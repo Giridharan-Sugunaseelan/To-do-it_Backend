@@ -21,6 +21,11 @@ public class AuthController {
         return ResponseEntity.ok(registerStatus);
     }
 
+    @GetMapping("/alive")
+    public ResponseEntity<Boolean> keepAlive(){
+        return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<JwtTokenDto> loginUser(@RequestBody LoginDto loginDto) {
         JwtTokenDto tokenDto = this.service.loginUser(loginDto);
