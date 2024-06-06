@@ -68,7 +68,7 @@ public class TaskService {
         List<SectionTaskDto> sectionTasks1 = getSectionTasks(projects);
         List<TaskDto> allTasks= new ArrayList<>(projectTasks1);
         allTasks.addAll(sectionTasks1);
-        return allTasks;
+        return allTasks.stream().sorted((a, b) -> a.getDueDate().compareTo(b.getDueDate())).toList();
     }
 
     public TaskDto completeTask(Long id){
