@@ -35,9 +35,16 @@ public class TaskController {
         return ResponseEntity.ok(taskDto);
     }
 
+    @PutMapping("/sectionTask")
+    public ResponseEntity<TaskDto> completeSectionTask(@RequestParam Long taskId, @RequestParam Long sectionId){
+        SectionTaskDto sectionTaskDto = this.service.completeSectionTask(taskId, sectionId);
+        return ResponseEntity.ok(sectionTaskDto);
+    }
+
     @PutMapping("/projectTask/{taskId}")
     public ResponseEntity<TaskDto> updateTask(@RequestBody TaskDto dto, @PathVariable Long taskId){
         TaskDto updateTask = this.service.updateProjectTask(dto, taskId);
+        System.out.println(updateTask);
         return new ResponseEntity<>(updateTask, HttpStatus.OK);
     }
 
@@ -82,4 +89,5 @@ public class TaskController {
         TaskDto sectionTaskDto = this.service.updateSectionTask(dto, taskId);
         return new ResponseEntity<>(sectionTaskDto, HttpStatus.OK);
     }
+
 }

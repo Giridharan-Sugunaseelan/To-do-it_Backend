@@ -157,4 +157,12 @@ public class TaskService {
         TaskDto taskDto = TaskMapper.taskToSectionTaskDto(updatedTask, dto.getSection_id());
         return TaskMapper.taskToSectionTaskDto(updatedTask,dto.getSection_id());
     }
+
+    public SectionTaskDto completeSectionTask(Long taskId, Long sectionId) {
+        Section section = this.sectionRepository.findById(sectionId).orElseThrow(() -> new SectionNotFoundException("Section with the given id not found!"));
+        Task task = section.getTasks().stream().filter((currentTask) -> currentTask.getTask_id().equals(taskId)).findFirst().orElseThrow(() -> new TaskNotFoundException("Task with the given id not found!"));
+        task.setCompleted(!task.getCompleted());
+        Task updatedTask = this.taskRepository.save(task);
+        return TaskMapper.taskToSectionTaskDto(updatedTask, sectionId);
+    }
 }
